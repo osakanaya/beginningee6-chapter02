@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- テスト用の永続性ユニットの定義 -->
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<!--  永続性ユニットの名前を定義 -->
+    <persistence-unit name="test">
+		<!-- 
+			永続化先のデータベースへ接続するデータソースのJNDI名を指定する。
+			
+			定義する永続性ユニットはテスト用のため、ここでは、テスト用の
+			データソースのJNDI名を指定する。
+		-->
+        <jta-data-source>jdbc/BeginningJavaEE6Chapter02</jta-data-source>
+        <properties>
+        	<!-- 
+        		永続性ユニットが起動した時のマッピングテーブルの扱いを
+        		設定する。
+        		ここでは「create」を定義している。
+        		
+        		「create」を定義すると、永続性ユニットが起動した時に
+        		JPAのソースコードからエンティティへマッピングされる
+        		テーブルがすでに存在する場合はこれらのテーブルを削除し、
+        		ソースコードに書かれたエンティティマッピングの定義に
+        		基づき、テーブルが再作成される。
+        		
+        	-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+			<!-- 
+				JPAによって発行されるSQL文をログ出力する設定
+			 -->
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
